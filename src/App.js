@@ -26,7 +26,7 @@ export default class App extends Component {
           component={Add}>
             <Add/>
           </Route>
-          <Route exact path="/schools/detail"
+          <Route exact path="/schools/detail/:id"
           component={Detail}>
             <Detail/>
           </Route>

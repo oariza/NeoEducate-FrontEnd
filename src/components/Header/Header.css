@@ -23,7 +23,19 @@
 }
 
 .header-container p {
-  font-size: 2.4rem;
+  font-size: 1.7rem;
   font-weight: 300;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.loading {
+  position: fixed;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

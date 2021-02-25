@@ -57,10 +57,6 @@ p {
   font-size: 2.4rem;
 }
 
-form {
-  width: 80%;
-}
-
 input {
   border-color: #4FA9DD;
   border-radius: 1rem;
@@ -81,15 +77,21 @@ input {
   padding: 1rem 5rem;
   text-decoration: none;
   font-size: 2.5rem;
-  margin: 2rem 0;
   text-align: center;
   border-radius: 5rem;
   border: none;
+  cursor: pointer;
 }
 
 .btn-primary {
   background-color: #F30098;
   color: #ffffff;
+}
+
+.btn-register {
+  background-color: #ffffff;
+  border: 1px solid #F30098;
+  color: #F30098;
 }
 
 .btn-secondary {

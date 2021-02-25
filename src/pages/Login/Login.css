@@ -35,8 +35,17 @@
   }
 }
 
+.main-login form {
+  width: 80%;
+}
+
 #login-form {
   display: flex;
   flex-direction: column;
+}
+
+.error-container {
+  color: red;
+  font-size: 1.5rem;
 }
 

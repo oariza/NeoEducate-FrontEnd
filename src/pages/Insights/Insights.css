@@ -4,11 +4,30 @@
   margin-bottom: 2rem;
 }
 
+@media (min-width: 768px) {
+  .nav-container-insights {
+    border-bottom: 1px solid #C4C4C4;
+    padding-bottom: 2rem;
+    justify-content: flex-start;
+  }
+
+  .nav-container-insights img {
+    margin-right: 30rem;
+  }
+}
+
 .insight-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .insight-container {
+    width: 50%;
+    margin: 2rem;
+  }
 }
 
 .insight-data {

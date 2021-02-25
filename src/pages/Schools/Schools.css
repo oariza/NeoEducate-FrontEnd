@@ -52,10 +52,6 @@
   padding: 1rem 0;
 }
 
-.schoolName-container:last-of-type {
-  border-bottom: none;
-}
-
 .schoolName-container p {
   margin: 0;
   padding-left: 1rem;
@@ -82,6 +78,11 @@
   width: 66%;
   display: flex;
   justify-content: space-between;
+}
+
+a:any-link {
+  text-decoration: none;
+  color: #000000;
 }
 
 
