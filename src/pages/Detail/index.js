@@ -19,6 +19,7 @@ export default function Detail() {
   const[allSchools, setAllSchools] = useState([])
   const[oneSchool, setOneSchool] = useState([])
 
+
   useEffect(() => {
     const getSchools = async() => {
       const { docs } = await db.collection('schools').get()
@@ -71,8 +72,7 @@ export default function Detail() {
                 </div>            
               </div>
       
-              <div className="white-container">
-      
+              <div className="white-container">      
                 <div className="card-container line">
                   <img src={`${cardIcon}`} alt=" "/>
                   <div className="card-container-text">

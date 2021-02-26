@@ -151,7 +151,9 @@ export default function Edit() {
       <main className="container white-container school-form">
         <Hidden only={['sm', 'xs']}>
           <nav className="container nav-container-add">
-            <img src={`${backIconB}`} alt=" "/>
+            <Link to = "/schools">
+              <img src={`${backIconB}`} alt=" "/>
+            </Link>
             <h2>Add school</h2>        
           </nav>
         </Hidden>

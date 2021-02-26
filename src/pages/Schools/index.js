@@ -28,6 +28,15 @@ export default function Schools() {
     getSchools()
   },[])
 
+  const deleteUsers = async (id) => {
+    try{
+      await db.collection('schools').doc(id).delete()     
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div>
       <Header/>
@@ -92,9 +101,54 @@ export default function Schools() {
                 allSchools.length !== 0 ?
                 (
                   allSchools.map(item => (
-                      <div className="schoolName-container">                  
+                      <div className="schoolName-container">  
+                      <div className="schoolAvatarContainer">
                         <Avatar key={`${item.id}`} alt={`${item.school}`} src={`${item.imgSchool}`} className="avatar-img" />
-                        <p>{item.school}</p>                           
+                        <div className="detail-info-text">
+                          <h3>{item.school}</h3>
+                          <p>Member since: 10/22/2020</p>
+                        </div> 
+                      </div>                
+                        
+
+                        <div className="white-container">      
+                          <div className="card-container line">
+                            <img src={`${cardIcon}`} alt=" "/>
+                            <div className="card-container-text">
+
+                              <p className="card-label-detail">{item.creditCard}</p>
+                              <p className="card-label">CARD NUMBER</p>
+                            </div> 
+                          </div>
+                
+                          <div className="plan-details">
+                            <div className="card-container">
+                              <img src={`${starIcon}`} alt=" "/>
+                              <div className="card-container-text">
+                                <p className="card-label-detail">{item.tier}</p>
+                                <p className="card-label">TIER</p>
+                              </div> 
+                            </div>
+                            <div className="card-container">
+                              <img src={`${usersIcon}`} alt=" "/>
+                              <div className="card-container-text">
+                                <p className="card-label-detail">{item.numUsers}</p>
+                                <p className="card-label">USERS</p>
+                              </div> 
+                            </div>
+                          </div>      
+                        </div> 
+
+                        <div className="btn-container">
+                          <Link to={`/schools/edit/${item.id}`}>
+                            <input type="text" value="Edit" className="btn btn-primary"/> 
+                          </Link>  
+                          <Link to="schools">
+                            <input onClick={(id)=>{deleteUsers(item.id)}} type="text" value="Delete" className="btn btn-secondary"/>    
+                          </Link>
+                        </div>
+
+                                                
                       </div>
                   ))
                 )
@@ -105,42 +159,6 @@ export default function Schools() {
                   </div>
                 )
               }
-            </div>
-
-            <div className="details-of-schools">
-              <div className="white-container detail-info">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img avatar-detail" />
-                <div className="detail-info-text">
-                  <h3>School 1</h3>
-                  <p>Member since: 10/22/2020</p>
-                </div>            
-              </div>
-
-              <div className="white-container">
-                <div className="card-container line">
-                  <img src={`${cardIcon}`} alt=" "/>
-                  <div className="card-container-text">
-                    <p className="card-label-detail">xxxx xxxx xxxx xx52</p>
-                    <p className="card-label">CARD NUMBER</p>
-                  </div> 
-                </div>
-                <div className="plan-details">
-                  <div className="card-container">
-                    <img src={`${starIcon}`} alt=" "/>
-                    <div className="card-container-text">
-                      <p className="card-label-detail">Basic</p>
-                      <p className="card-label">PLAN</p>
-                    </div> 
-                  </div>
-                  <div className="card-container">
-                    <img src={`${usersIcon}`} alt=" "/>
-                    <div className="card-container-text">
-                      <p className="card-label-detail">145</p>
-                      <p className="card-label">USERS</p>
-                    </div> 
-                  </div>
-                </div> 
-              </div>                
             </div>
 
           </div>

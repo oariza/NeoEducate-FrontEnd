@@ -22,6 +22,7 @@ export default function Add() {
   const[tier, setTier] = useState('')
   const[activeUser, setActiveUser] = useState(false)
   const[error, setError] = useState('')
+  const[objSchool, setObjSchool] = useState([])
 
   const setNewSchool = async (e) => {
     e.preventDefault()
@@ -233,10 +234,7 @@ export default function Add() {
             />
             <label for="active">Active</label>
           </div>
-          <Link to="/schools">
-            <input type="submit" value="Save" className="btn btn-primary"/>
-          </Link>
-          
+            <input type="submit" value="Save" className="btn btn-primary"/>          
         </form>
         {
           error ?
