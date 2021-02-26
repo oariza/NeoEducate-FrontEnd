@@ -28,9 +28,6 @@ export default function Schools() {
     getSchools()
   },[])
 
-
-
-
   return (
     <div>
       <Header/>
@@ -74,39 +71,40 @@ export default function Schools() {
       <Hidden only={['sm', 'xs']}>
         <main className="container white-container">
           <nav className="nav-container nav-web">
-            <div className="web-icons">
-              <img src={`${chartPieB}`} alt=" "/>
-              <p>Insights</p>
-            </div>              
+            <Link to="/schools/insights">
+              <div className="web-icons">
+                <img src={`${chartPieB}`} alt=" "/>
+                <p>Insights</p>
+              </div>
+            </Link>              
             <h2>Schools' list</h2>
-            <div className="web-icons">
-              <img src={`${addIconB}`} alt=" "/>
-              <p>Add school</p>
-            </div>                      
+            <Link to="/schools/form">
+              <div className="web-icons">
+                <img src={`${addIconB}`} alt=" "/>
+                <p>Add school</p>
+              </div> 
+            </Link>                      
           </nav>
 
           <div className="school-info">
             <div className="list-of-schools">
-              <div className="schoolName-container">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img" />
-                <p>School 1</p>
-              </div>
-              <div className="schoolName-container">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img" />
-                <p>School 1</p>
-              </div>
-              <div className="schoolName-container">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img" />
-                <p>School 1</p>
-              </div>
-              <div className="schoolName-container">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img" />
-                <p>School 1</p>
-              </div>
-              <div className="schoolName-container">
-                <Avatar alt="School 1" src="/static/images/avatar/1.jpg" className="avatar-img" />
-                <p>School 1</p>
-              </div>
+              {
+                allSchools.length !== 0 ?
+                (
+                  allSchools.map(item => (
+                      <div className="schoolName-container">                  
+                        <Avatar key={`${item.id}`} alt={`${item.school}`} src={`${item.imgSchool}`} className="avatar-img" />
+                        <p>{item.school}</p>                           
+                      </div>
+                  ))
+                )
+                :
+                (
+                  <div className="error-container">
+                    No hay ninguna escuela agregada
+                  </div>
+                )
+              }
             </div>
 
             <div className="details-of-schools">

@@ -34,6 +34,10 @@ input[type=checkbox] {
   margin-right: 2rem;
 }
 
+.school-form {
+  margin-bottom: 3rem;
+}
+
 @media (min-width: 768px) {
   .school-form form {
     width: 100%;

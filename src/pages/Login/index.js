@@ -48,8 +48,8 @@ export default function Login() {
     <div>
         <main className="main-login">
           <div className="container login-container">
-          <img src={`${logo}`} alt=" "/>
-          <h1>Log in</h1>
+            <img src={`${logo}`} alt=" "/>
+            <h1>Log in</h1>
             <form onSubmit={registerUser} id="login-form">              
               <input 
                 onChange={(e)=>{setEmail(e.target.value)}}
@@ -81,8 +81,7 @@ export default function Login() {
               (
                 <span></span>
               )
-            }
-            
+            }            
           </div>
         </main>
     </div>

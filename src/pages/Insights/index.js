@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 import backIcon from '../../img/back-arrow.svg'
 import Hidden from '@material-ui/core/Hidden'
@@ -15,7 +16,9 @@ export default function Insights() {
 
       <Hidden only={['md', 'lg', 'xl']}>
         <nav className="container nav-container-insights">
-          <img src={`${backIcon}`} alt=" "/>
+          <Link to = "/schools">
+            <img src={`${backIcon}`} alt=" "/>
+          </Link>
           <h2>Insights</h2>
         </nav>
       </Hidden>

@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import {db} from '../../firebaseconfig'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Header from '../../components/Header'
 import backIcon from '../../img/back-arrow.svg'
 import Hidden from '@material-ui/core/Hidden'
 import backIconB from '../../img/back-arrow-b.svg'
 
-import './Add.css'
+import './Edit.css'
 
-export default function Add() {
+export default function Edit() {
+  const[idUser, setIdUser] = useState('')
   const[imgSchool, setImgSchool] = useState('')
   const[school, setSchool] = useState('')
   const[creditCard, setCreditCard] = useState('')
@@ -22,8 +23,53 @@ export default function Add() {
   const[tier, setTier] = useState('')
   const[activeUser, setActiveUser] = useState(false)
   const[error, setError] = useState('')
+  const location = useLocation()
+  const[allSchools, setAllSchools] = useState([])
+  const[oneSchool, setOneSchool] = useState([])
 
-  const setNewSchool = async (e) => {
+  useEffect(() => {
+    const getSchools = async() => {
+      const { docs } = await db.collection('schools').get()
+      const schoolsArray = docs.map( item => ({ id: item.id, ...item.data() }))
+      console.log(schoolsArray)
+      setAllSchools(schoolsArray)
+
+      const path = location.pathname
+      const idSchool = path.substring(14)
+      console.log(idSchool)
+      
+      const filterSchool = schoolsArray.filter(school=> school.id == idSchool)
+      console.log(filterSchool)
+      setOneSchool(filterSchool)
+
+      const editUsers = async (id) => {
+        try {
+          const data = await db.collection('schools').doc(id).get()
+          const { imgSchool, school, creditCard, nameCard, expYear, expMonth, cvv, postalCode, numUsers, tier, activeUser } = data.data()
+          setImgSchool(imgSchool)
+          setSchool(school)
+          setCreditCard(creditCard)
+          setNameCard(nameCard)
+          setExpYear(expYear)
+          setExpMonth(expMonth)
+          setCvv(cvv)
+          setPostalCode(postalCode)
+          setNumUsers(numUsers)
+          setTier(tier)
+          setActiveUser(activeUser)
+          setIdUser(id)
+          console.log(id)
+        }
+        catch(err) {
+          console.log(err)
+        }
+      }
+      editUsers(idSchool)
+    }
+    getSchools()
+  },[])
+
+  const setUpdate = async(e) => {
     e.preventDefault()
     if (!school.trim()) {
       setError('School name field is empty')
@@ -49,7 +95,7 @@ export default function Add() {
     if (!numUsers.trim()) {
       setError('Number of users field is empty')
     }
-    const objSchool = {
+    const schoolUpdated = {
       imgSchool: imgSchool,
       school:school,
       creditCard:creditCard,
@@ -60,27 +106,15 @@ export default function Add() {
       postalCode:postalCode,
       numUsers:numUsers,
       tier:tier,
-      activeUser:activeUser,
+      activeUser:activeUser
     }
-    try{
-      const data = await db.collection('schools').add(objSchool)
-      alert('Escuela añadida')
+    try {
+      await db.collection('schools').doc(idUser).set(schoolUpdated)
+      alert("Escuela actualizada correctamente")
     }
     catch(err){
       console.log(err)
     }
-    setImgSchool('')
-    setSchool('')
-    setCreditCard('')
-    setNameCard('')
-    setExpYear('')
-    setExpMonth('')
-    setCvv('')
-    setPostalCode('')
-    setNumUsers('')
-    setTier('')
-    setActiveUser(false)
-
 
   }
   
@@ -110,21 +144,19 @@ export default function Add() {
           <Link to = "/schools">
             <img src={`${backIcon}`} alt=" "/>
           </Link>
-          <h2>Add school</h2>        
+          <h2>Edit school</h2>        
         </nav>
       </Hidden>
 
       <main className="container white-container school-form">
         <Hidden only={['sm', 'xs']}>
-          <Link to = "/schools">
-            <nav className="container nav-container-add">
-              <img src={`${backIconB}`} alt=" "/>
-              <h2>Add school</h2>        
-            </nav>
-          </Link>
+          <nav className="container nav-container-add">
+            <img src={`${backIconB}`} alt=" "/>
+            <h2>Add school</h2>        
+          </nav>
         </Hidden>
         
-        <form onSubmit={setNewSchool}>
+        <form onSubmit={setUpdate}>
           <label for="img-school">URL School image</label>
           <input 
             value={imgSchool}
@@ -233,9 +265,9 @@ export default function Add() {
             />
             <label for="active">Active</label>
           </div>
-          <Link to="/schools">
-            <input type="submit" value="Save" className="btn btn-primary"/>
-          </Link>
+
+            <input type="submit" value="Update school" className="btn btn-primary"/>
+
           
         </form>
         {

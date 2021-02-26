@@ -8,6 +8,7 @@ import Schools from './pages/Schools';
 import Add from './pages/Add';
 import Detail from './pages/Detail';
 import Insights from './pages/Insights';
+import Edit from './pages/Edit';
 
 
 export default class App extends Component {
@@ -25,6 +26,10 @@ export default class App extends Component {
           <Route exact path="/schools/form"
           component={Add}>
             <Add/>
+          </Route>
+          <Route exact path="/schools/edit/:id"
+          component={Edit}>
+            <Edit/>
           </Route>
           <Route exact path="/schools/detail/:id"
           component={Detail}>
